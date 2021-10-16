@@ -1,3 +1,4 @@
+import os 
 from remotezip import RemoteZip
 class remote_zip_fs_wrapper:
   zip_url=None
@@ -38,3 +39,12 @@ class remote_zip_fs_wrapper:
     return self.zip_url,self.zip,self.infolist,self.filelist
   def close_zip(self):
     self.zip.close()
+  def create_fs_hierarchy(self,zip_url):
+    with RemoteZip(zip_url) as zip:
+      for zip_info in zip.infolist():
+        if(zip_info.is_dir()):
+          !mkdir -p $zip_info.filename
+          print("created directory "+zip_info.filename)
+        else:
+          !touch $zip_info.filename
+          print("created file "+zip_info.filename)
