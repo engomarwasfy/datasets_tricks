@@ -1,4 +1,3 @@
-!pip install remotezip
 from remotezip import RemoteZip
 class remote_zip_fs_wrapper:
   zip_url=None
