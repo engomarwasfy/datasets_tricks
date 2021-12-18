@@ -19,9 +19,7 @@ class remote_zip_fs_wrapper:
   def tmp_zip_info_list(self,zip_url):
     with RemoteZip(zip_url) as zip:
       infolist=zip.infolist()
-      filelist=[]
-      for zip_info in zip.infolist():
-        filelist.append(zip_info.filename)
+      filelist = [zip_info.filename for zip_info in zip.infolist()]
       return infolist,filelist
   def tmp_zip_extract_file(self,zip_url,file_path):
     with RemoteZip(zip_url) as zip:
@@ -31,8 +29,7 @@ class remote_zip_fs_wrapper:
   def tmp_zip_open_file(self,zip_url,file_path):
     with RemoteZip(zip_url) as zip:
       with zip.open(file_path) as zip_open_file:
-        fileread=zip_open_file.read()
-        return fileread
+        return zip_open_file.read()
   def zip_open_file(self,file_path):
      self.tmp_zip_open_file(self.zip_url,file_path)
   def get_zip(self):
